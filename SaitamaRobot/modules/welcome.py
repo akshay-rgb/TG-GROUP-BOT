@@ -16,7 +16,6 @@ from SaitamaRobot.modules.helper_funcs.msg_types import get_welcome_type
 from SaitamaRobot.modules.helper_funcs.string_handling import (
     escape_invalid_curly_brackets, markdown_parser)
 from SaitamaRobot.modules.log_channel import loggable
-from SaitamaRobot.modules.sql.global_bans_sql import is_user_gbanned
 from telegram import (ChatPermissions, InlineKeyboardButton,
                       InlineKeyboardMarkup, ParseMode, Update)
 from telegram.error import BadRequest
