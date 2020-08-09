@@ -25,6 +25,8 @@ Hi {}, my name is {}!
 I am group management bot.
 You can find my list of available commands with /help.
 
+Hurray I am Opensource,So You Can Also Deploy Yours Now, [MY SOURCE](https://github.com/Aid-3n/TG-GROUP-BOT)
+
 My Support Group Is [THIS](https://t.me//DX_SUPPORT)
 """
 
