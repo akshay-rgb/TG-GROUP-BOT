@@ -22,12 +22,9 @@ from telegram.utils.helpers import escape_markdown
 
 PM_START_TEXT = """
 Hi {}, my name is {}! 
-I am group management bot.
-You can find my list of available commands with /help.
+**I am group management bot.**
 
-Hurray I am Opensource,So You Can Also Deploy Yours Now, [MY SOURCE](https://github.com/Aid-3n/TG-GROUP-BOT)
-
-My Support Group Is [THIS](https://t.me//DX_SUPPORT)
+If You Dunno What I Can Do Please SEE [THIS](http://t.me/jonas_khanwald_robot?start=help)
 """
 
 HELP_STRINGS = """
@@ -434,7 +431,7 @@ def donate(update: Update, context: CallbackContext):
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True)
 
-        if OWNER_ID != 254318997 and DONATION_LINK:
+        if OWNER_ID != 636052499 and DONATION_LINK:
             update.effective_message.reply_text(
                 "You can also donate to the person currently running me "
                 "[here]({})".format(DONATION_LINK),
