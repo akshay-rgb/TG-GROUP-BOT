@@ -125,46 +125,24 @@ def test(update: Update, context: CallbackContext):
     print(update.effective_message)
 
 
-@run_async
-def start(update: Update, context: CallbackContext):
-    args = context.args
-    if update.effective_chat.type == "private":
-        if len(args) >= 1:
-            if args[0].lower() == "help":
-                send_help(update.effective_chat.id, HELP_STRINGS)
-            elif args[0].lower() == "disasters":
-                IMPORTED["disasters"].send_disasters(update)
-            elif args[0].lower().startswith("stngs_"):
-                match = re.match("stngs_(.*)", args[0].lower())
-                chat = dispatcher.bot.getChat(match.group(1))
+def send_start(bot, update):
+    #Try to remove old message
+    try:
+        query = update.callback_query
+        query.message.delete()
+    except:
+        pass
 
-                if is_user_admin(chat, update.effective_user.id):
-                    send_settings(
-                        match.group(1), update.effective_user.id, False)
-                else:
-                    send_settings(
-                        match.group(1), update.effective_user.id, True)
+    chat = update.effective_chat  # type: Optional[Chat]
+    first_name = update.effective_user.first_name 
+    text = PM_START_TEXT
 
-            elif args[0][1:].isdigit() and "rules" in IMPORTED:
-                IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
+    keyboard = [[InlineKeyboardButton(text="🤝Help",callback_data="help_back"),InlineKeyboardButton(text="🛡Creator🛡",url="https://t.me/AID_3N")]]
+    keyboard += [[InlineKeyboardButton(text="🌐Connect Group", callback_data="main_connect"),InlineKeyboardButton(text="⚜️Add Me⚜️",url="t.me/{}?startgroup=true".format(bot.username))]]
 
-        else:
-            first_name = update.effective_user.first_name
-            update.effective_message.reply_photo(
-                SAITAMA_IMG,
-                PM_START_TEXT.format(
-                    escape_markdown(first_name),
-                    escape_markdown(context.bot.first_name), SUPPORT_CHAT),
-                parse_mode=ParseMode.MARKDOWN,
-                disable_web_page_preview=True,
-                reply_markup=InlineKeyboardMarkup([[
-                    InlineKeyboardButton(
-                        text="Add Saitama to your group",
-                        url="t.me/{}?startgroup=true".format(
-                            context.bot.username))
-                ]]))
-    else:
-        update.effective_message.reply_text("Yo, whadup?")
+    update.effective_message.reply_photo(img, PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_NAME, OWNER_ID), 
+                                         reply_markup=InlineKeyboardMarkup(keyboard), disable_web_page_preview=True, parse_mode=ParseMode.MARKDOWN)
+
 
 
 # for test purposes
