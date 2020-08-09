@@ -157,21 +157,20 @@ def start(update: Update, context: CallbackContext):
                     escape_markdown(context.bot.first_name), SUPPORT_CHAT),
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
-                reply_markup=InlineKeyboardMarkup([[
-                    InlineKeyboardButton(
-                        text="Add Jonas to your group",
-                        url="t.me/{}?startgroup=true".format(
-                            context.bot.username))
-                 
-                     [ 
-                     InlineKeyboardButton(
-                        text="😎Creator😎", 
-                        url="https://t.me/AID_3N")
-                   ]
-                
-                ]]))
+                reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton('Source 😒', url='https://github.com/Aid-3n/TG-GROUP-BOT'),
+                    InlineKeyboardButton('Updates?/\?', url='https://t.me/DX_BOTZ')
+                ],
+                [
+                    InlineKeyboardButton('Creator😎', url='https://t.me/AID_3N')
+                ]
+            ]
+        )
+    )
     else:
-        update.effective_message.reply_text("Hoi,What's Up")
+        update.effective_message.reply_text("**Hoi,What's Up**")
 
 # for test purposes
 def error_callback(update: Update, context: CallbackContext):
